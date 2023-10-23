@@ -1,0 +1,55 @@
+﻿@model Car
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Dodaj samochód</h1>
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="Maker">Producent</label>
+        <input class="form-control" asp-for="Maker"/>
+        <span asp-validation-for="Maker" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Name">Model</label>
+        <input class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Volume">Pojemność silnika (cm^3)</label>
+        <input class="form-control" asp-for="Volume" />
+        <span asp-validation-for="Volume" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Power">Moc silnika</label>
+        <input class="form-control" asp-for="Power" />
+        <span asp-validation-for="Power" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Type">Rodzaj silnika</label>
+        <input class="form-control" asp-for="Type" />
+        <span asp-validation-for="Type" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Registration">Numer rejestracyjny</label>
+        <input class="form-control" asp-for="Registration" />
+        <span asp-validation-for="Registration" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Owner">Właściciel</label>
+        <input class="form-control" asp-for="Owner" />
+        <span asp-validation-for="Owner" class="text-danger"></span>
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-primary">Dodaj</button>
+    </div>
+</form>
