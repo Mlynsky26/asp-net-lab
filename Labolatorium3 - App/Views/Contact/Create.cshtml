@@ -8,27 +8,34 @@
 <h1>Dodaj kontakt</h1>
 <form asp-controller="Contact" asp-action="Create" method="post">
     <div class="mb-3">
-        <label asp-for="Name">Imię</label>
+        <label asp-for="Name"></label>
         <input class="form-control" asp-for="Name"/>
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Email">Email</label>
+        <label asp-for="Email"></label>
         <input class="form-control" asp-for="Email" />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Phone">Telefon</label>
+        <label asp-for="Phone"></label>
         <input class="form-control" asp-for="Phone" />
         <span asp-validation-for="Phone" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Birth">Data urodzenia</label>
+        <label asp-for="Birth"></label>
         <input class="form-control" asp-for="Birth" />
         <span asp-validation-for="Birth" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Priority"></label>
+        <select class="form-select" asp-for="Priority" asp-items="@Html.GetEnumSelectList<Priority>()">
+        </select>
+        <span asp-validation-for="Priority" class="text-danger"></span>
     </div>
 
     <div>
