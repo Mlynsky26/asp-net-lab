@@ -5,11 +5,16 @@ namespace Labolatorium3___App.Controllers
 {
     public class CarController : Controller
     {
-        static readonly Dictionary<int, Car> _cars = new Dictionary<int, Car>();
-        static int id = 1;
+        private readonly ICarService _carService;
+
+        public CarController(ICarService carService)
+        {
+            _carService = carService;
+        }
+
         public IActionResult Index()
         {
-            return View(_cars);
+            return View(_carService.FindAll());
         }
 
         [HttpGet]
@@ -23,9 +28,7 @@ namespace Labolatorium3___App.Controllers
         {
             if(ModelState.IsValid)
             {
-                model.Id = id++;
-                _cars[model.Id] = model;
-                //zapisanie modelu
+                _carService.Add(model);
                 return RedirectToAction("Index");
             }
 
@@ -35,7 +38,7 @@ namespace Labolatorium3___App.Controllers
         [HttpGet]
         public IActionResult Update(int id)
         {
-            return View(_cars[id]);
+            return View(_carService.FindById(id));
         }
 
         [HttpPost]
@@ -43,8 +46,7 @@ namespace Labolatorium3___App.Controllers
         {
             if (ModelState.IsValid)
             {
-                _cars[model.Id] = model;
-                //zapisanie modelu
+                _carService.Update(model);
                 return RedirectToAction("Index");
             }
 
@@ -54,13 +56,13 @@ namespace Labolatorium3___App.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            return View(_cars[id]);
+            return View(_carService.FindById(id));
         }
 
         [HttpPost]
         public IActionResult Delete(Car model)
         {
-            _cars.Remove(model.Id);
+            _carService.DeleteById(model.Id);
 
             return RedirectToAction("Index");
         }
@@ -68,7 +70,7 @@ namespace Labolatorium3___App.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            return View(_cars[id]);
+            return View(_carService.FindById(id));
         }
 
 

@@ -9,43 +9,43 @@
 <form asp-action="Update" method="post">
     <input asp-for="Id"/>
     <div class="mb-3">
-        <label asp-for="Maker">Producent</label>
+        <label asp-for="Maker"></label>
         <input class="form-control" asp-for="Maker" />
         <span asp-validation-for="Maker" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Name">Model</label>
+        <label asp-for="Name"></label>
         <input class="form-control" asp-for="Name" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Volume">Pojemność silnika (cm^3)</label>
+        <label asp-for="Volume"></label>
         <input class="form-control" asp-for="Volume" />
         <span asp-validation-for="Volume" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Power">Moc silnika</label>
+        <label asp-for="Power"></label>
         <input class="form-control" asp-for="Power" />
         <span asp-validation-for="Power" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Type">Rodzaj silnika</label>
-        <input class="form-control" asp-for="Type" />
-        <span asp-validation-for="Type" class="text-danger"></span>
+        <label asp-for="EngineType"></label>
+        <select class="form-select" asp-for="EngineType" asp-items="@Html.GetEnumSelectList<EngineType>()" ></select>
+        <span asp-validation-for="EngineType" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Registration">Numer rejestracyjny</label>
+        <label asp-for="Registration"></label>
         <input class="form-control" asp-for="Registration" />
         <span asp-validation-for="Registration" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Owner">Właściciel</label>
+        <label asp-for="Owner"></label>
         <input class="form-control" asp-for="Owner" />
         <span asp-validation-for="Owner" class="text-danger"></span>
     </div>

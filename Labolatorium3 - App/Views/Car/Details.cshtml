@@ -10,11 +10,11 @@
 </div>
 
 <ul>
-    <li>Marka: @Model.Maker</li>
-    <li>Model: @Model.Name</li>
-    <li>Pojemność silnika  (cm^3): @Model.Volume</li>
-    <li>Moc silnika: @Model.Power</li>
-    <li>Rodzaj silnika: @Model.Type</li>
-    <li>Numer rejestracyjny: @Model.Registration</li>
-    <li>Właściciel: @Model.Owner</li>
+    <li>@Html.DisplayNameFor(i => Model.Maker): @Model.Maker</li>
+    <li>@Html.DisplayNameFor(i => Model.Name): @Model.Name</li>
+    <li>@Html.DisplayNameFor(i => Model.Volume): @Model.Volume</li>
+    <li>@Html.DisplayNameFor(i => Model.Power): @Model.Power</li>
+    <li>@Html.DisplayNameFor(i => Model.EngineType): @Model.EngineType.GetDisplayName()</li>
+    <li>@Html.DisplayNameFor(i => Model.Registration): @Model.Registration</li>
+    <li>@Html.DisplayNameFor(i => Model.Owner): @Model.Owner</li>
 </ul>

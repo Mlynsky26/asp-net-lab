@@ -5,8 +5,8 @@
 @{
 }
 <h1>Czy napewno chcesz usunąć samochód</h1>
-<p>Marka: @Model.Maker</p>
-<p>Model: @Model.Name</p>
+<p>@Html.DisplayNameFor(i => Model.Maker): @Model.Maker</p>
+<p>@Html.DisplayNameFor(i => Model.Name): @Model.Name</p>
 <form asp-action="Delete">
     <input asp-for="Id" />
     <button class="btn btn-primary" type="submit" >Tak</button>

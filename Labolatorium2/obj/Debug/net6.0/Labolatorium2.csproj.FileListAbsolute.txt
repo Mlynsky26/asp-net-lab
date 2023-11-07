@@ -29,3 +29,33 @@ D:\Users\mateusz.moniowski\Desktop\Laboratorium ASP .NET\Labolatorium2\obj\Debug
 D:\Users\mateusz.moniowski\Desktop\Laboratorium ASP .NET\Labolatorium2\obj\Debug\net6.0\Labolatorium2.pdb
 D:\Users\mateusz.moniowski\Desktop\Laboratorium ASP .NET\Labolatorium2\obj\Debug\net6.0\Labolatorium2.genruntimeconfig.cache
 D:\Users\mateusz.moniowski\Desktop\Laboratorium ASP .NET\Labolatorium2\obj\Debug\net6.0\ref\Labolatorium2.dll
+D:\Studia\asp net\Laboratorium\Labolatorium2\bin\Debug\net6.0\appsettings.Development.json
+D:\Studia\asp net\Laboratorium\Labolatorium2\bin\Debug\net6.0\appsettings.json
+D:\Studia\asp net\Laboratorium\Labolatorium2\bin\Debug\net6.0\Labolatorium2.staticwebassets.runtime.json
+D:\Studia\asp net\Laboratorium\Labolatorium2\bin\Debug\net6.0\Labolatorium2.exe
+D:\Studia\asp net\Laboratorium\Labolatorium2\bin\Debug\net6.0\Labolatorium2.deps.json
+D:\Studia\asp net\Laboratorium\Labolatorium2\bin\Debug\net6.0\Labolatorium2.runtimeconfig.json
+D:\Studia\asp net\Laboratorium\Labolatorium2\bin\Debug\net6.0\Labolatorium2.dll
+D:\Studia\asp net\Laboratorium\Labolatorium2\bin\Debug\net6.0\Labolatorium2.pdb
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\Labolatorium2.GeneratedMSBuildEditorConfig.editorconfig
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\Labolatorium2.AssemblyInfoInputs.cache
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\Labolatorium2.AssemblyInfo.cs
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\Labolatorium2.csproj.CoreCompileInputs.cache
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\Labolatorium2.MvcApplicationPartsAssemblyInfo.cache
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\Labolatorium2.RazorAssemblyInfo.cache
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\Labolatorium2.RazorAssemblyInfo.cs
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\staticwebassets\msbuild.Labolatorium2.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\staticwebassets\msbuild.build.Labolatorium2.props
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Labolatorium2.props
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Labolatorium2.props
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\staticwebassets.pack.json
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\staticwebassets.build.json
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\staticwebassets.development.json
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\scopedcss\bundle\Labolatorium2.styles.css
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\scopedcss\projectbundle\Labolatorium2.bundle.scp.css
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\Labolatorium2.dll
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\refint\Labolatorium2.dll
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\Labolatorium2.pdb
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\Labolatorium2.genruntimeconfig.cache
+D:\Studia\asp net\Laboratorium\Labolatorium2\obj\Debug\net6.0\ref\Labolatorium2.dll
