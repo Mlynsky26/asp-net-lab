@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Studia\\asp net\\Laboratorium\\Labolatorium3 - App\\Labolatorium3 - App.csproj": {}
+    "D:\\Users\\mateusz.moniowski\\Desktop\\asp-lab\\Labolatorium3 - App\\Labolatorium3 - App.csproj": {}
   },
   "projects": {
-    "D:\\Studia\\asp net\\Laboratorium\\Labolatorium3 - App\\Labolatorium3 - App.csproj": {
+    "D:\\Users\\mateusz.moniowski\\Desktop\\asp-lab\\Data\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Studia\\asp net\\Laboratorium\\Labolatorium3 - App\\Labolatorium3 - App.csproj",
-        "projectName": "Labolatorium3 - App",
-        "projectPath": "D:\\Studia\\asp net\\Laboratorium\\Labolatorium3 - App\\Labolatorium3 - App.csproj",
-        "packagesPath": "C:\\Users\\mlyns\\.nuget\\packages\\",
-        "outputPath": "D:\\Studia\\asp net\\Laboratorium\\Labolatorium3 - App\\obj\\",
+        "projectUniqueName": "D:\\Users\\mateusz.moniowski\\Desktop\\asp-lab\\Data\\Data.csproj",
+        "projectName": "Data",
+        "projectPath": "D:\\Users\\mateusz.moniowski\\Desktop\\asp-lab\\Data\\Data.csproj",
+        "packagesPath": "D:\\Users\\mateusz.moniowski\\.nuget\\packages\\",
+        "outputPath": "D:\\Users\\mateusz.moniowski\\Desktop\\asp-lab\\Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\mlyns\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "D:\\Users\\mateusz.moniowski\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,6 +39,98 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[7.0.13, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Users\\mateusz.moniowski\\Desktop\\asp-lab\\Labolatorium3 - App\\Labolatorium3 - App.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Users\\mateusz.moniowski\\Desktop\\asp-lab\\Labolatorium3 - App\\Labolatorium3 - App.csproj",
+        "projectName": "Labolatorium3 - App",
+        "projectPath": "D:\\Users\\mateusz.moniowski\\Desktop\\asp-lab\\Labolatorium3 - App\\Labolatorium3 - App.csproj",
+        "packagesPath": "D:\\Users\\mateusz.moniowski\\.nuget\\packages\\",
+        "outputPath": "D:\\Users\\mateusz.moniowski\\Desktop\\asp-lab\\Labolatorium3 - App\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "D:\\Users\\mateusz.moniowski\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Users\\mateusz.moniowski\\Desktop\\asp-lab\\Data\\Data.csproj": {
+                "projectPath": "D:\\Users\\mateusz.moniowski\\Desktop\\asp-lab\\Data\\Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.23, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.23, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[6.0.16, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -58,7 +150,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     }
