@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Users\\mateusz.moniowski\\Desktop\\asp-lab\\Labolatorium2\\Labolatorium2.csproj": {}
+    "D:\\Studia\\asp net\\test\\Labolatorium2\\Labolatorium2.csproj": {}
   },
   "projects": {
-    "D:\\Users\\mateusz.moniowski\\Desktop\\asp-lab\\Labolatorium2\\Labolatorium2.csproj": {
+    "D:\\Studia\\asp net\\test\\Labolatorium2\\Labolatorium2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Users\\mateusz.moniowski\\Desktop\\asp-lab\\Labolatorium2\\Labolatorium2.csproj",
+        "projectUniqueName": "D:\\Studia\\asp net\\test\\Labolatorium2\\Labolatorium2.csproj",
         "projectName": "Labolatorium2",
-        "projectPath": "D:\\Users\\mateusz.moniowski\\Desktop\\asp-lab\\Labolatorium2\\Labolatorium2.csproj",
-        "packagesPath": "D:\\Users\\mateusz.moniowski\\.nuget\\packages\\",
-        "outputPath": "D:\\Users\\mateusz.moniowski\\Desktop\\asp-lab\\Labolatorium2\\obj\\",
+        "projectPath": "D:\\Studia\\asp net\\test\\Labolatorium2\\Labolatorium2.csproj",
+        "packagesPath": "C:\\Users\\mlyns\\.nuget\\packages\\",
+        "outputPath": "D:\\Studia\\asp net\\test\\Labolatorium2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "D:\\Users\\mateusz.moniowski\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mlyns\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -59,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
