@@ -1,4 +1,6 @@
-﻿namespace Labolatorium3___App.Models
+﻿using Data.Entities;
+
+namespace Labolatorium3___App.Models
 {
     public interface IContactService
     {
@@ -7,5 +9,6 @@
         List<Contact> FindAll();
         void DeleteById(int id);
         void Update(Contact contact);
+        List<OrganizationEntity> FindAllOrganizations();
     }
 }

@@ -32,6 +32,14 @@
     </div>
 
     <div class="mb-3">
+        <label asp-for="OrganizationId"></label>
+        <select class="form-select" asp-for="OrganizationId" asp-items="@Model.OrganizationList">
+        </select>
+        <span asp-validation-for="OrganizationId" class="text-danger"></span>
+        <a class="btn btn-primary" asp-controller="Organization" asp-action="Create">Dodaj organizacje</a>
+    </div>
+
+    <div class="mb-3">
         <label asp-for="Priority"></label>
         <select class="form-select" asp-for="Priority" asp-items="@Html.GetEnumSelectList<Priority>()">
         </select>

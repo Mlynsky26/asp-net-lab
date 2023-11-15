@@ -1,5 +1,6 @@
 ﻿using Labolatorium3___App.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Labolatorium3___App.Controllers
 {
@@ -20,7 +21,9 @@ namespace Labolatorium3___App.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            Contact model = new Contact();
+            model.OrganizationList = CreateOrganizationItemList();
+            return View(model);
         }
 
         [HttpPost]
@@ -31,8 +34,24 @@ namespace Labolatorium3___App.Controllers
                 _contactService.Add(model);
                 return RedirectToAction("Index");
             }
+            model.OrganizationList = CreateOrganizationItemList();
+            return View(model);
+        }
 
-            return View();
+        private List<SelectListItem> CreateOrganizationItemList()
+        {
+            return _contactService.FindAllOrganizations()
+                        .Select(e => new SelectListItem()
+                            {
+                                Text = e.Name,
+                                Value = e.Id.ToString(),
+                            })
+                        .Append(new SelectListItem()
+                        {
+                            Text = "Brak",
+                            Value = ""
+                        })
+                        .ToList();
         }
 
         [HttpGet]

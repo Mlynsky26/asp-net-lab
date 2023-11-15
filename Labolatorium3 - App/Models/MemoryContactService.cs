@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using Data.Entities;
+using System.Numerics;
 using System.Xml.Linq;
 
 namespace Labolatorium3___App.Models
@@ -45,6 +46,11 @@ namespace Labolatorium3___App.Models
             {
                 _contacts[contact.Id] = contact;
             }
+        }
+
+        public List<OrganizationEntity> FindAllOrganizations()
+        {
+            throw new NotImplementedException();
         }
     }
 }
