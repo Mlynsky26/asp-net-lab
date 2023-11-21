@@ -34,11 +34,6 @@ namespace Labolatorium3___App.Models
             return _context.Contacts.Select(e => ContactMapper.FromEntity(e)).ToList();
         }
 
-        public List<OrganizationEntity> FindAllOrganizations()
-        {
-            return _context.Organizations.ToList();
-        }
-
         public Contact? FindById(int id)
         {
             var find = _context.Contacts.Find(id);
@@ -51,5 +46,10 @@ namespace Labolatorium3___App.Models
             _context.Update(entity);
             _context.SaveChanges();
         }
+        public List<OrganizationEntity> FindAllOrganizations()
+        {
+            return _context.Organizations.ToList();
+        }
+
     }
 }

@@ -21,8 +21,8 @@ namespace Labolatorium3___App.Models
         [HiddenInput]
         public int Id { get; set; }
 
-        [Display(Name="Imię")]
-        [Required(ErrorMessage ="Musisz podać imie")]
+        [Display(Name = "Imię")]
+        [Required(ErrorMessage = "Musisz podać imie")]
         [StringLength(maximumLength: 50, ErrorMessage = "Zbyt długie imię (maksymalnie 50 znaków)")]
         public string Name { get; set; }
 
