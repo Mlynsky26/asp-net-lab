@@ -1,4 +1,6 @@
 ﻿using Data.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public class AppDbContext: DbContext
+    public class AppDbContext: IdentityDbContext<IdentityUser>
     {
         private string Path { get; set; }
         public DbSet<ContactEntity> Contacts { get; set; }
@@ -27,6 +29,41 @@ namespace Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            var user = new IdentityUser { 
+                Id = Guid.NewGuid().ToString(),
+                UserName = "adam",
+                NormalizedUserName = "ADAM",
+                Email = "adam@gmail.com",
+                NormalizedEmail = "ADAM@GMAIL.COM",
+                EmailConfirmed = true,
+            };
+
+            PasswordHasher<IdentityUser> passwordHasher = new PasswordHasher<IdentityUser>();
+            user.PasswordHash = passwordHasher.HashPassword(user, "zaq1@WSX");
+            modelBuilder.Entity<IdentityUser>()
+                .HasData(user);
+
+            var adminRole = new IdentityRole()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "admin",
+                NormalizedName = "ADMIN"
+            };
+
+            adminRole.ConcurrencyStamp = adminRole.Id;
+
+            modelBuilder.Entity<IdentityUserRole<string>>()
+                .HasData(
+                    new IdentityUserRole<string>()
+                    {
+                        RoleId = adminRole.Id,
+                        UserId = user.Id,
+                    }
+                );
+
+            modelBuilder.Entity<IdentityRole>()
+                .HasData(adminRole);
 
             modelBuilder.Entity<ContactEntity>()
                 .HasOne(c => c.Organization)

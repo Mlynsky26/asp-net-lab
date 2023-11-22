@@ -1,5 +1,7 @@
 using Data;
 using Labolatorium3___App.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Labolatorium3___App
 {
@@ -10,12 +12,19 @@ namespace Labolatorium3___App
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+              .AddRoles<IdentityRole>()
+              .AddEntityFrameworkStores<AppDbContext>();
+
+            builder.Services.AddDbContext<CarsDbContext>();
+            builder.Services.AddRazorPages();
+            builder.Services.AddSession();
             builder.Services.AddControllersWithViews();
             builder.Services.AddTransient<IContactService, EfContactService>();
             builder.Services.AddTransient<ICarService, EfCarService>();
             builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
             builder.Services.AddDbContext<AppDbContext>();
-            builder.Services.AddDbContext<CarsDbContext>();
+
 
             var app = builder.Build();
 
@@ -31,8 +40,10 @@ namespace Labolatorium3___App
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
+            app.MapRazorPages();
 
             app.MapControllerRoute(
                 name: "default",
