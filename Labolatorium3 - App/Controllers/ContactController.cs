@@ -117,7 +117,9 @@ namespace Labolatorium3___App.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            return View(_contactService.FindById(id));
+            Contact? model = _contactService.FindById(id);
+            if(model is null) return NotFound();
+            return View(model);
         }
 
 

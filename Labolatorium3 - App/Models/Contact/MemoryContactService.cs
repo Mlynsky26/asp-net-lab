@@ -7,14 +7,14 @@ namespace Labolatorium3___App.Models
     public class MemoryContactService : IContactService
     {
         private Dictionary<int, Contact> _contacts = new Dictionary<int, Contact>();
-        private int id = 2;
+        private int id = 1;
         private readonly IDateTimeProvider _timeProvider;
 
         public MemoryContactService(IDateTimeProvider timeProvider)
         {
             _timeProvider = timeProvider;
             Contact contact = new Contact() { Id = 1, Name = "Jarek", Email = "jarek@gamil.com", Phone = "123123123", Priority = Priority.Urgent, Created = _timeProvider.GetDate() };
-            Add(contact);
+            //Add(contact);
         }
 
         public int Add(Contact contact)
@@ -37,7 +37,7 @@ namespace Labolatorium3___App.Models
 
         public Contact? FindById(int id)
         {
-            return _contacts[id];
+            return _contacts.ContainsKey(id) ? _contacts[id] : null;
         }
 
         public void Update(Contact contact)
