@@ -5,20 +5,22 @@ using Microsoft.AspNetCore.Mvc;
 namespace Labolatorium3___App.Controllers
 {
     [Authorize(Roles = "admin")]
-    public class CarController : Controller
+    public class OwnerController : Controller
     {
+        private readonly IOwnerService _ownerService;
         private readonly ICarService _carService;
 
-        public CarController(ICarService carService)
+        public OwnerController(IOwnerService OwnerService, ICarService CarService)
         {
-            _carService = carService;
+            _ownerService = OwnerService;
+            _carService = CarService;
         }
 
         [AllowAnonymous]
         public IActionResult Index(int page = 1, int size = 3)
         {
             if (size < 1) return BadRequest();
-            return View(_carService.FindPage(page, size));
+            return View(_ownerService.FindPage(page, size));
         }
 
         [HttpGet]
@@ -28,11 +30,11 @@ namespace Labolatorium3___App.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Car model)
+        public IActionResult Create(Owner model)
         {
             if(ModelState.IsValid)
             {
-                _carService.Add(model);
+                _ownerService.Add(model);
                 return RedirectToAction("Index");
             }
 
@@ -42,15 +44,15 @@ namespace Labolatorium3___App.Controllers
         [HttpGet]
         public IActionResult Update(int id)
         {
-            return View(_carService.FindById(id));
+            return View(_ownerService.FindById(id));
         }
 
         [HttpPost]
-        public IActionResult Update(Car model)
+        public IActionResult Update(Owner model)
         {
             if (ModelState.IsValid)
             {
-                _carService.Update(model);
+                _ownerService.Update(model);
                 return RedirectToAction("Index");
             }
 
@@ -60,13 +62,13 @@ namespace Labolatorium3___App.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            return View(_carService.FindById(id));
+            return View(_ownerService.FindById(id));
         }
 
         [HttpPost]
-        public IActionResult Delete(Car model)
+        public IActionResult Delete(Owner model)
         {
-            _carService.DeleteById(model.Id);
+            _ownerService.DeleteById(model.Id);
 
             return RedirectToAction("Index");
         }
@@ -74,9 +76,8 @@ namespace Labolatorium3___App.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            Car? model = _carService.FindById(id);
-            if (model is null) return NotFound();
-            return View(model);
+            ViewBag.Cars = _carService.FindByOwnerId(id);
+            return View(_ownerService.FindById(id));
         }
 
 

@@ -34,7 +34,7 @@ namespace Data.Entities
 
         [Column("engine_type")]
         [Required]
-        public string EngineType { get; set; }
+        public int EngineType { get; set; }
 
         [Column("registration")]
         [Required]
@@ -42,7 +42,7 @@ namespace Data.Entities
         public string Registration { get; set; }
 
         [Column("owner")]
-        [Required]
-        public string? Owner { get; set; }
+        public OwnerEntity? Owner { get; set; }
+        public int? OwnerId { get; set; }
     }
 }

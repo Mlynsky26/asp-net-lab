@@ -11,14 +11,84 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231122102709_identity")]
-    partial class identity
+    [Migration("20231209165013_AddOwners")]
+    partial class AddOwners
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
+
+            modelBuilder.Entity("Data.Entities.CarEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("EngineType")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("engine_type");
+
+                    b.Property<string>("Maker")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("maker");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("name");
+
+                    b.Property<int?>("OwnerId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Power")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("power");
+
+                    b.Property<string>("Registration")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("registration");
+
+                    b.Property<int>("Volume")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("volume");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("cars");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EngineType = 1,
+                            Maker = "Seat",
+                            Name = "Ibiza",
+                            OwnerId = 1,
+                            Power = 130,
+                            Registration = "KRA123AB",
+                            Volume = 1200
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EngineType = 2,
+                            Maker = "Opel",
+                            Name = "Astra",
+                            OwnerId = 2,
+                            Power = 180,
+                            Registration = "WW123AB",
+                            Volume = 1800
+                        });
+                });
 
             modelBuilder.Entity("Data.Entities.ContactEntity", b =>
                 {
@@ -115,6 +185,45 @@ namespace Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Data.Entities.OwnerEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Owners");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Darek",
+                            Phone = "123456789",
+                            Surname = "Kowalski"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Mariusz",
+                            Phone = "987654321",
+                            Surname = "Nowak"
+                        });
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -143,8 +252,8 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "dc5ff978-79f7-4ca0-ae1a-cb2a0cd66d69",
-                            ConcurrencyStamp = "dc5ff978-79f7-4ca0-ae1a-cb2a0cd66d69",
+                            Id = "11df366d-1b50-4f8e-92ca-b5193de2fa4f",
+                            ConcurrencyStamp = "11df366d-1b50-4f8e-92ca-b5193de2fa4f",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -239,17 +348,17 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "33658f92-51f7-4fa9-a964-a833403a4cc2",
+                            Id = "1e2e6b74-d422-4719-8eb3-a4fe37937d62",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "effbf28b-6608-41f0-a761-38a9a1b05a16",
+                            ConcurrencyStamp = "07ffd1b1-bf27-4f80-b10d-a94a61fa9b6f",
                             Email = "adam@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADAM@GMAIL.COM",
                             NormalizedUserName = "ADAM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAk6ZLvDTv8+qvzzP2IG/pnjxP68EDXDhSTg9xMnkyOqzxscyfYNIw68fsISJ2Velg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMLfRuCTzxUEDKJrBGskXgxzr+KYtUZXcveEg5Ju9GP8ylAXwjXUAe9jjX68oAKH6g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "934a85d5-aa3a-4e6c-8093-e105878743c0",
+                            SecurityStamp = "4e0079b0-2f07-49a6-a6dd-3649cc832302",
                             TwoFactorEnabled = false,
                             UserName = "adam"
                         });
@@ -317,8 +426,8 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "33658f92-51f7-4fa9-a964-a833403a4cc2",
-                            RoleId = "dc5ff978-79f7-4ca0-ae1a-cb2a0cd66d69"
+                            UserId = "1e2e6b74-d422-4719-8eb3-a4fe37937d62",
+                            RoleId = "11df366d-1b50-4f8e-92ca-b5193de2fa4f"
                         });
                 });
 
@@ -339,6 +448,15 @@ namespace Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Data.Entities.CarEntity", b =>
+                {
+                    b.HasOne("Data.Entities.OwnerEntity", "Owner")
+                        .WithMany("Cars")
+                        .HasForeignKey("OwnerId");
+
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("Data.Entities.ContactEntity", b =>
@@ -387,6 +505,52 @@ namespace Data.Migrations
                                 new
                                 {
                                     OrganizationEntityId = 2,
+                                    City = "Warszawa",
+                                    PostalCode = "54-120",
+                                    Street = "Fiolkowa"
+                                });
+                        });
+
+                    b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("Data.Entities.OwnerEntity", b =>
+                {
+                    b.OwnsOne("Data.Models.Address", "Address", b1 =>
+                        {
+                            b1.Property<int>("OwnerEntityId")
+                                .HasColumnType("INTEGER");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("PostalCode")
+                                .IsRequired()
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Street")
+                                .IsRequired()
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("OwnerEntityId");
+
+                            b1.ToTable("Owners");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OwnerEntityId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    OwnerEntityId = 1,
+                                    City = "Krakow",
+                                    PostalCode = "31-200",
+                                    Street = "Filpa"
+                                },
+                                new
+                                {
+                                    OwnerEntityId = 2,
                                     City = "Warszawa",
                                     PostalCode = "54-120",
                                     Street = "Fiolkowa"
@@ -450,6 +614,11 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.OrganizationEntity", b =>
                 {
                     b.Navigation("Contacts");
+                });
+
+            modelBuilder.Entity("Data.Entities.OwnerEntity", b =>
+                {
+                    b.Navigation("Cars");
                 });
 #pragma warning restore 612, 618
         }

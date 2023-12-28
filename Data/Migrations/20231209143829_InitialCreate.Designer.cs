@@ -3,6 +3,7 @@ using System;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231209143829_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
@@ -23,8 +26,9 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("EngineType")
-                        .HasColumnType("INTEGER")
+                    b.Property<string>("EngineType")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
                         .HasColumnName("engine_type");
 
                     b.Property<string>("Maker")
@@ -39,8 +43,10 @@ namespace Data.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("name");
 
-                    b.Property<int?>("OwnerId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Owner")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("owner");
 
                     b.Property<int>("Power")
                         .HasColumnType("INTEGER")
@@ -58,18 +64,16 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId");
-
                     b.ToTable("cars");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            EngineType = 1,
+                            EngineType = "Benzyna",
                             Maker = "Seat",
                             Name = "Ibiza",
-                            OwnerId = 1,
+                            Owner = "Jarek",
                             Power = 130,
                             Registration = "KRA123AB",
                             Volume = 1200
@@ -77,10 +81,10 @@ namespace Data.Migrations
                         new
                         {
                             Id = 2,
-                            EngineType = 2,
+                            EngineType = "Diesel",
                             Maker = "Opel",
                             Name = "Astra",
-                            OwnerId = 2,
+                            Owner = "Darek",
                             Power = 180,
                             Registration = "WW123AB",
                             Volume = 1800
@@ -182,45 +186,6 @@ namespace Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Data.Entities.OwnerEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Owners");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Darek",
-                            Phone = "123456789",
-                            Surname = "Kowalski"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Mariusz",
-                            Phone = "987654321",
-                            Surname = "Nowak"
-                        });
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -249,8 +214,8 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "11df366d-1b50-4f8e-92ca-b5193de2fa4f",
-                            ConcurrencyStamp = "11df366d-1b50-4f8e-92ca-b5193de2fa4f",
+                            Id = "1fa2774a-54b8-46b2-8a05-b871276d3c48",
+                            ConcurrencyStamp = "1fa2774a-54b8-46b2-8a05-b871276d3c48",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -345,17 +310,17 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1e2e6b74-d422-4719-8eb3-a4fe37937d62",
+                            Id = "636b200e-694f-4693-a4d4-c2e83644d8a0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "07ffd1b1-bf27-4f80-b10d-a94a61fa9b6f",
+                            ConcurrencyStamp = "88bd8252-9455-4bca-83b5-8c24a910886a",
                             Email = "adam@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADAM@GMAIL.COM",
                             NormalizedUserName = "ADAM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMLfRuCTzxUEDKJrBGskXgxzr+KYtUZXcveEg5Ju9GP8ylAXwjXUAe9jjX68oAKH6g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPdH/fzBbitEmkCpFDLqGqXV9MNAhxSZn7y/13m27O+yUqfjGBePgM3Nmd1z68I8aA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4e0079b0-2f07-49a6-a6dd-3649cc832302",
+                            SecurityStamp = "5dc5e439-c02e-46bd-9721-9dd46d6914f4",
                             TwoFactorEnabled = false,
                             UserName = "adam"
                         });
@@ -423,8 +388,8 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "1e2e6b74-d422-4719-8eb3-a4fe37937d62",
-                            RoleId = "11df366d-1b50-4f8e-92ca-b5193de2fa4f"
+                            UserId = "636b200e-694f-4693-a4d4-c2e83644d8a0",
+                            RoleId = "1fa2774a-54b8-46b2-8a05-b871276d3c48"
                         });
                 });
 
@@ -445,15 +410,6 @@ namespace Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("Data.Entities.CarEntity", b =>
-                {
-                    b.HasOne("Data.Entities.OwnerEntity", "Owner")
-                        .WithMany("Cars")
-                        .HasForeignKey("OwnerId");
-
-                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("Data.Entities.ContactEntity", b =>
@@ -502,52 +458,6 @@ namespace Data.Migrations
                                 new
                                 {
                                     OrganizationEntityId = 2,
-                                    City = "Warszawa",
-                                    PostalCode = "54-120",
-                                    Street = "Fiolkowa"
-                                });
-                        });
-
-                    b.Navigation("Address");
-                });
-
-            modelBuilder.Entity("Data.Entities.OwnerEntity", b =>
-                {
-                    b.OwnsOne("Data.Models.Address", "Address", b1 =>
-                        {
-                            b1.Property<int>("OwnerEntityId")
-                                .HasColumnType("INTEGER");
-
-                            b1.Property<string>("City")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("PostalCode")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("Street")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.HasKey("OwnerEntityId");
-
-                            b1.ToTable("Owners");
-
-                            b1.WithOwner()
-                                .HasForeignKey("OwnerEntityId");
-
-                            b1.HasData(
-                                new
-                                {
-                                    OwnerEntityId = 1,
-                                    City = "Krakow",
-                                    PostalCode = "31-200",
-                                    Street = "Filpa"
-                                },
-                                new
-                                {
-                                    OwnerEntityId = 2,
                                     City = "Warszawa",
                                     PostalCode = "54-120",
                                     Street = "Fiolkowa"
@@ -611,11 +521,6 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.OrganizationEntity", b =>
                 {
                     b.Navigation("Contacts");
-                });
-
-            modelBuilder.Entity("Data.Entities.OwnerEntity", b =>
-                {
-                    b.Navigation("Cars");
                 });
 #pragma warning restore 612, 618
         }

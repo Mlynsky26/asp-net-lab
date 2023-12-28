@@ -4,8 +4,10 @@
 *@
 @{
 }
-
-<h1>Dodaj samochód</h1>
+<div class="d-flex gap-3 align-items-center">
+    <a class="btn btn-outline-info" asp-action="Index"> << Powrót</a>
+    <h1>Dodaj samochód</h1>
+</div>
 <form asp-action="Create" method="post">
     <div class="mb-3">
         <label asp-for="Maker"></label>
@@ -44,12 +46,43 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="Owner"></label>
-        <input class="form-control" asp-for="Owner" />
-        <span asp-validation-for="Owner" class="text-danger"></span>
+        <label asp-for="OwnerId">Właściciel</label>
+        <div class="d-flex justify-content-between align-items-center gap-3 mb-2">
+            <input class="form-control" type="text" id="filter" />
+            <a class="btn btn-primary" style="flex-shrink: 0" asp-controller="Owner" asp-action="Create">Dodaj właściciela</a>
+        </div>
+        <select class="form-select" id="OwnerId" name="OwnerId">
+        </select>
+        <span asp-validation-for="OwnerId" class="text-danger"></span>
     </div>
 
     <div>
         <button type="submit" class="btn btn-primary">Dodaj</button>
     </div>
 </form>
+
+@section Scripts {
+    <script>
+        const select = document.getElementById('OwnerId');
+        const filter = document.getElementById('filter');
+
+        function fillSelect() {
+            fetch(`/api/owners?q=${filter.value}`)
+                .then(response => response.json())
+                .then(json => {
+                    select.innerHTML = ''
+                    for (let item of json) {
+                        const option = document.createElement('option')
+                        option.setAttribute('value', item.id)
+                        option.innerText = item.name
+                        select.appendChild(option)
+                    }
+                })
+        }
+
+        filter.onchange = fillSelect
+        filter.oninput = fillSelect
+
+        window.addEventListener('DOMContentLoaded', fillSelect)
+    </script>
+}

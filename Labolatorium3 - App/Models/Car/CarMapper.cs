@@ -13,9 +13,10 @@ namespace Labolatorium3___App.Models
                 Name = entity.Name,
                 Volume = entity.Volume,
                 Power = entity.Power,
-                EngineType = EngineType.Gas,
+                EngineType = (EngineType)entity.EngineType,
                 Registration = entity.Registration,
-                Owner = "",
+                OwnerId = entity.OwnerId,
+                Owner = OwnerMapper.FromEntity(entity.Owner)
             };
         }
 
@@ -28,9 +29,10 @@ namespace Labolatorium3___App.Models
                 Name = model.Name,
                 Volume = model.Volume,
                 Power = model.Power,
-                EngineType = "Gas",
+                EngineType = (int)model.EngineType,
                 Registration = model.Registration,
-                Owner = "",
+                OwnerId = model.OwnerId,
+                Owner = OwnerMapper.ToEntity(model.Owner)
             };
         }
     }

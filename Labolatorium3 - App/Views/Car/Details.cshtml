@@ -4,8 +4,9 @@
 *@
 @{
 }
-<div class="d-flex gap-2 align-items-center">
-    <a asp-action="Index" class="btn btn-dark">Wróć</a>
+
+<div class="d-flex gap-3 align-items-center">
+    <a class="btn btn-outline-info" asp-action="Index"> << Powrót</a>
     <h1>Szczegóły samochodu</h1>
 </div>
 
@@ -16,5 +17,17 @@
     <li>@Html.DisplayNameFor(i => Model.Power): @Model.Power</li>
     <li>@Html.DisplayNameFor(i => Model.EngineType): @Model.EngineType.GetDisplayName()</li>
     <li>@Html.DisplayNameFor(i => Model.Registration): @Model.Registration</li>
-    <li>@Html.DisplayNameFor(i => Model.Owner): @Model.Owner</li>
+    <li>@Html.DisplayNameFor(i => Model.Owner): 
+        @if (Model.Owner is not null)
+        {
+            <ul>
+                <li>@Html.DisplayNameFor(i => Model.Owner.Name): @Model.Owner.Name</li>
+                <li>@Html.DisplayNameFor(i => Model.Owner.Surname): @Model.Owner.Surname</li>
+                <li>@Html.DisplayNameFor(i => Model.Owner.Phone): @Model.Owner.Phone</li>
+            </ul>
+        }else
+        {
+            <span>Brak</span>
+        }
+    </li>
 </ul>

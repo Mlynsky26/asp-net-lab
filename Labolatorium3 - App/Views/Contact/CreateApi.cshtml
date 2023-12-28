@@ -34,7 +34,7 @@
     <div class="mb-3">
         <label asp-for="OrganizationId"></label>
         <input type="text" id="filter" />
-        <select class="form-select" id="OrganizationId">
+        <select class="form-select" id="OrganizationId" name="OrganizationId">
         </select>
         <span asp-validation-for="OrganizationId" class="text-danger"></span>
         <a class="btn btn-primary" asp-controller="Organization" asp-action="Create">Dodaj organizacje</a>

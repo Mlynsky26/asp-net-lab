@@ -47,6 +47,8 @@ namespace Labolatorium3___App.Models
         public string Registration { get; set; }
 
         [Display(Name = "Właściciel")]
-        public string? Owner { get; set; }
+        public Owner? Owner { get; set; }
+
+        public int? OwnerId { get; set; }
     }
 }

@@ -16,8 +16,14 @@
             {
                 if (context.Request.Cookies.TryGetValue(CookieName, out string value))
                 {
-                    var visitDate = DateTime.Parse(value);
-                    context.Items.Add(CookieName, visitDate);
+                    try
+                    {
+                        var visitDate = DateTime.Parse(value);
+                        context.Items.Add(CookieName, visitDate);
+                    }catch (Exception ex)
+                    {
+                        context.Items.Add(CookieName, "Wrong value");
+                    }
                 }
                 else
                 {

@@ -22,7 +22,7 @@ namespace Labolatorium3___App.Controllers
             }
             else
             {
-                ViewBag.LastVisitDate = lastVisitDate?.Date;
+                ViewBag.LastVisitDate = lastVisitDate?.Date.ToString("yyyy-MM-dd");
             }
             return View();
         }

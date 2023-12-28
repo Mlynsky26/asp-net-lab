@@ -13,8 +13,6 @@ namespace Labolatorium3___App.Models
         public MemoryContactService(IDateTimeProvider timeProvider)
         {
             _timeProvider = timeProvider;
-            Contact contact = new Contact() { Id = 1, Name = "Jarek", Email = "jarek@gamil.com", Phone = "123123123", Priority = Priority.Urgent, Created = _timeProvider.GetDate() };
-            //Add(contact);
         }
 
         public int Add(Contact contact)

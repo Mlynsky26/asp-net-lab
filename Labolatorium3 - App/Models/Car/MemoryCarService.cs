@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Numerics;
 using System.Xml.Linq;
 
 namespace Labolatorium3___App.Models
@@ -10,8 +11,8 @@ namespace Labolatorium3___App.Models
 
         public MemoryCarService()
         {
-            Car car = new Car() { Id = id, Maker = "Opel", Name = "Astra", Volume = 1900, Power = 130, EngineType = EngineType.Diesel, Registration = "KRA 12DSC", Owner = "Marek" };
-            Add(car);
+            //Car car = new Car() { Id = id, Maker = "Opel", Name = "Astra", Volume = 1900, Power = 130, EngineType = EngineType.Diesel, Registration = "KRA 12DSC", Owner = "Marek" };
+            //Add(car);
         }
 
         public int Add(Car car)
@@ -33,8 +34,13 @@ namespace Labolatorium3___App.Models
 
         public Car? FindById(int id)
         {
-            return _cars[id];
+            return _cars.ContainsKey(id) ? _cars[id] : null;
         }
+        public List<Car> FindByOwnerId(int id)
+        {
+            return _cars.Values.ToList().FindAll(c => c.OwnerId == id);
+        }
+
 
         public void Update(Car car)
         {
@@ -42,6 +48,17 @@ namespace Labolatorium3___App.Models
             {
                 _cars[car.Id] = car;
             }
+        }
+
+        public PagingList<Car> FindPage(int page, int size)
+        {
+            return PagingList<Car>.Create(
+                    (p, s) => _cars.Values
+                    .ToList()
+                    .Skip((p - 1) * s)
+                    .Take(s)
+                    , page, size, _cars.Count()
+                );
         }
     }
 }

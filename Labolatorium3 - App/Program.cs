@@ -16,12 +16,12 @@ namespace Labolatorium3___App
               .AddRoles<IdentityRole>()
               .AddEntityFrameworkStores<AppDbContext>();
 
-            builder.Services.AddDbContext<CarsDbContext>();
             builder.Services.AddRazorPages();
             builder.Services.AddSession();
             builder.Services.AddControllersWithViews();
             builder.Services.AddTransient<IContactService, EfContactService>();
             builder.Services.AddTransient<ICarService, EfCarService>();
+            builder.Services.AddTransient<IOwnerService, EfOwnerService>();
             builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
             builder.Services.AddDbContext<AppDbContext>();
 
