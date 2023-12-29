@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Data.Entities;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 namespace Labolatorium3___App.Models
@@ -17,11 +18,11 @@ namespace Labolatorium3___App.Models
     {
         [HiddenInput]
         public int Id { get; set; }
-        
+
         [Display(Name = "Marka")]
-        [Required(ErrorMessage = "Musisz podać markę")]
-        [StringLength(maximumLength: 50, ErrorMessage = "Zbyt długa nazwa marki (maksymalnie 50 znaków)")]
-        public string Maker { get; set; }
+        public MakerEntity? Maker { get; set; }
+
+        public int MakerId { get; set; }
 
         [Display(Name = "Model")]
         [Required(ErrorMessage = "Musisz podać model")]

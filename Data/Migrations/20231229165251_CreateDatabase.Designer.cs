@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231209165013_AddOwners")]
-    partial class AddOwners
+    [Migration("20231229165251_CreateDatabase")]
+    partial class CreateDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,11 +30,8 @@ namespace Data.Migrations
                         .HasColumnType("INTEGER")
                         .HasColumnName("engine_type");
 
-                    b.Property<string>("Maker")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("maker");
+                    b.Property<int>("MakerId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -61,6 +58,8 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MakerId");
+
                     b.HasIndex("OwnerId");
 
                     b.ToTable("cars");
@@ -70,7 +69,7 @@ namespace Data.Migrations
                         {
                             Id = 1,
                             EngineType = 1,
-                            Maker = "Seat",
+                            MakerId = 1,
                             Name = "Ibiza",
                             OwnerId = 1,
                             Power = 130,
@@ -81,12 +80,23 @@ namespace Data.Migrations
                         {
                             Id = 2,
                             EngineType = 2,
-                            Maker = "Opel",
+                            MakerId = 2,
                             Name = "Astra",
                             OwnerId = 2,
                             Power = 180,
                             Registration = "WW123AB",
                             Volume = 1800
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EngineType = 2,
+                            MakerId = 2,
+                            Name = "Vectra",
+                            OwnerId = 1,
+                            Power = 100,
+                            Registration = "KK1237B",
+                            Volume = 1400
                         });
                 });
 
@@ -149,6 +159,73 @@ namespace Data.Migrations
                             Name = "marek",
                             OrganizationId = 2,
                             Phone = "1234569"
+                        });
+                });
+
+            modelBuilder.Entity("Data.Entities.MakerEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Makers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Seat"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Opel"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "BMW"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Mazada"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Audi"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Ford"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "VolksWagen"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Mercedes"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Ferrari"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Renault"
                         });
                 });
 
@@ -252,10 +329,17 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "11df366d-1b50-4f8e-92ca-b5193de2fa4f",
-                            ConcurrencyStamp = "11df366d-1b50-4f8e-92ca-b5193de2fa4f",
+                            Id = "0fdfe129-20e1-4192-b75b-17f4e06e865e",
+                            ConcurrencyStamp = "0fdfe129-20e1-4192-b75b-17f4e06e865e",
                             Name = "admin",
                             NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "12164877-6a43-4e0e-aca7-e24140596fe7",
+                            ConcurrencyStamp = "12164877-6a43-4e0e-aca7-e24140596fe7",
+                            Name = "user",
+                            NormalizedName = "USER"
                         });
                 });
 
@@ -348,19 +432,51 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1e2e6b74-d422-4719-8eb3-a4fe37937d62",
+                            Id = "6f28bdb0-da45-4363-bb8a-fd1f575a3912",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "07ffd1b1-bf27-4f80-b10d-a94a61fa9b6f",
+                            ConcurrencyStamp = "d80b7499-e71c-407f-94a0-74d13390ed01",
                             Email = "adam@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADAM@GMAIL.COM",
                             NormalizedUserName = "ADAM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMLfRuCTzxUEDKJrBGskXgxzr+KYtUZXcveEg5Ju9GP8ylAXwjXUAe9jjX68oAKH6g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECKVZFjdymYAMPkRDKOLhoZGIaoIkS4kaB2nryMoUQwEttkMwrgdc2ddmtZGHqJEBw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4e0079b0-2f07-49a6-a6dd-3649cc832302",
+                            SecurityStamp = "4a08255d-077a-4d99-93b5-49ef7888bba2",
                             TwoFactorEnabled = false,
                             UserName = "adam"
+                        },
+                        new
+                        {
+                            Id = "e7ae06d0-00e9-494d-97bb-e2b500194213",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "06bc0a28-bbaf-4d79-b1aa-f4cca8240fb7",
+                            Email = "marek@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MAREK@GMAIL.COM",
+                            NormalizedUserName = "MAREK",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPyxFQSoTTEoVo/WXgzfG/0jfGym59FDUltlwZ1wZ5J1GNDBuZEGNP0ARM/NJCijzQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "87a793f2-28ff-46b3-852c-f9ff63e57216",
+                            TwoFactorEnabled = false,
+                            UserName = "marek"
+                        },
+                        new
+                        {
+                            Id = "7b448ce9-9a7b-48c6-910a-0084a4460066",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "50c5bf68-0711-4196-b60a-afaff9183b9f",
+                            Email = "michal@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MICHAL@GMAIL.COM",
+                            NormalizedUserName = "MICHAL",
+                            PasswordHash = "AQAAAAEAACcQAAAAELk0/NN62ccHqUPbohoDoM/nJ8iRCY3y/0cXoxP+x9XD4FiwSOji41vICYZ4aYRTcA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "f6052561-4740-45be-a86a-db9850c3d5ab",
+                            TwoFactorEnabled = false,
+                            UserName = "michal"
                         });
                 });
 
@@ -426,8 +542,13 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "1e2e6b74-d422-4719-8eb3-a4fe37937d62",
-                            RoleId = "11df366d-1b50-4f8e-92ca-b5193de2fa4f"
+                            UserId = "6f28bdb0-da45-4363-bb8a-fd1f575a3912",
+                            RoleId = "0fdfe129-20e1-4192-b75b-17f4e06e865e"
+                        },
+                        new
+                        {
+                            UserId = "e7ae06d0-00e9-494d-97bb-e2b500194213",
+                            RoleId = "12164877-6a43-4e0e-aca7-e24140596fe7"
                         });
                 });
 
@@ -452,9 +573,17 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Entities.CarEntity", b =>
                 {
+                    b.HasOne("Data.Entities.MakerEntity", "Maker")
+                        .WithMany("Cars")
+                        .HasForeignKey("MakerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Data.Entities.OwnerEntity", "Owner")
                         .WithMany("Cars")
                         .HasForeignKey("OwnerId");
+
+                    b.Navigation("Maker");
 
                     b.Navigation("Owner");
                 });
@@ -609,6 +738,11 @@ namespace Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Data.Entities.MakerEntity", b =>
+                {
+                    b.Navigation("Cars");
                 });
 
             modelBuilder.Entity("Data.Entities.OrganizationEntity", b =>

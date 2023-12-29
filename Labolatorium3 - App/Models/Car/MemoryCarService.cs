@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Numerics;
 using System.Xml.Linq;
 
@@ -50,7 +51,7 @@ namespace Labolatorium3___App.Models
             }
         }
 
-        public PagingList<Car> FindPage(int page, int size)
+        public PagingList<Car> FindPage(int page, int size, int maker)
         {
             return PagingList<Car>.Create(
                     (p, s) => _cars.Values
@@ -59,6 +60,10 @@ namespace Labolatorium3___App.Models
                     .Take(s)
                     , page, size, _cars.Count()
                 );
+        }
+        public List<MakerEntity> GetMakers()
+        {
+            return new List<MakerEntity> ();
         }
     }
 }

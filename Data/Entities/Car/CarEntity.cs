@@ -14,10 +14,10 @@ namespace Data.Entities
         [Key]
         public int Id { get; set; }
 
-        [Column("maker")]
         [Required]
-        [MaxLength(50)]
-        public string Maker { get; set; }
+        [Column("maker")]
+        public MakerEntity Maker { get; set; }
+        public int MakerId { get; set; }
 
         [Column("name")]
         [Required]

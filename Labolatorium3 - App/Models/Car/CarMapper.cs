@@ -10,6 +10,7 @@ namespace Labolatorium3___App.Models
             {
                 Id = entity.Id,
                 Maker = entity.Maker,
+                MakerId = entity.MakerId,
                 Name = entity.Name,
                 Volume = entity.Volume,
                 Power = entity.Power,
@@ -26,6 +27,7 @@ namespace Labolatorium3___App.Models
             {
                 Id = model.Id,
                 Maker = model.Maker,
+                MakerId = model.MakerId,
                 Name = model.Name,
                 Volume = model.Volume,
                 Power = model.Power,

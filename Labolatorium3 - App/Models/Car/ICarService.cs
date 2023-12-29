@@ -1,4 +1,6 @@
-﻿namespace Labolatorium3___App.Models
+﻿using Data.Entities;
+
+namespace Labolatorium3___App.Models
 {
     public interface ICarService
     {
@@ -8,6 +10,7 @@
         List<Car> FindByOwnerId(int id);
         void DeleteById(int id);
         void Update(Car contact);
-        PagingList<Car> FindPage(int page, int size);
+        PagingList<Car> FindPage(int page, int size, int maker);
+        List<MakerEntity> GetMakers();
     }
 }

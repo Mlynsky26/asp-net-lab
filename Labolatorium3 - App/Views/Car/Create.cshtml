@@ -10,9 +10,12 @@
 </div>
 <form asp-action="Create" method="post">
     <div class="mb-3">
-        <label asp-for="Maker"></label>
-        <input class="form-control" asp-for="Maker"/>
-        <span asp-validation-for="Maker" class="text-danger"></span>
+        <label asp-for="MakerId">Marka</label>
+        <div class="d-flex justify-content-between align-items-center gap-3 mb-2 autocomplete">
+            <input class="form-control search" type="text" data-url="makers"/>
+            <select class="form-select target" id="MakerId" name="MakerId"></select>
+        </div>
+        <span asp-validation-for="OwnerId" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
@@ -45,13 +48,13 @@
         <span asp-validation-for="Registration" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-3 autocomplete">
         <label asp-for="OwnerId">Właściciel</label>
         <div class="d-flex justify-content-between align-items-center gap-3 mb-2">
-            <input class="form-control" type="text" id="filter" />
+            <input class="form-control search" type="text" data-url="owners" />
             <a class="btn btn-primary" style="flex-shrink: 0" asp-controller="Owner" asp-action="Create">Dodaj właściciela</a>
         </div>
-        <select class="form-select" id="OwnerId" name="OwnerId">
+        <select class="form-select target" id="OwnerId" name="OwnerId">
         </select>
         <span asp-validation-for="OwnerId" class="text-danger"></span>
     </div>
@@ -63,11 +66,25 @@
 
 @section Scripts {
     <script>
-        const select = document.getElementById('OwnerId');
-        const filter = document.getElementById('filter');
 
-        function fillSelect() {
-            fetch(`/api/owners?q=${filter.value}`)
+        window.addEventListener('DOMContentLoaded', () => {
+            const autocompletes = [...document.querySelectorAll(".autocomplete")];
+            autocompletes.forEach(a => {
+                initAutocomplete(a)
+            })
+        })
+
+        function initAutocomplete(autocomplete) {
+            const select = autocomplete.querySelector('.target');
+            const filter = autocomplete.querySelector('.search');
+
+            fillSelect(select, filter)
+            filter.oninput = () => { fillSelect(select, filter) }
+        }
+
+        function fillSelect(select, filter) {
+            const url = filter.dataset.url
+            fetch(`/api/${url}?q=${filter.value}`)
                 .then(response => response.json())
                 .then(json => {
                     select.innerHTML = ''
@@ -80,9 +97,6 @@
                 })
         }
 
-        filter.onchange = fillSelect
-        filter.oninput = fillSelect
 
-        window.addEventListener('DOMContentLoaded', fillSelect)
     </script>
 }

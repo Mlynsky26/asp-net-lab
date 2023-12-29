@@ -9,7 +9,7 @@
     <a class="btn btn-outline-info" asp-action="Index"> << Powrót</a>
     <h1>Czy napewno chcesz usunąć samochód</h1>
 </div>
-<p>@Html.DisplayNameFor(i => Model.Maker): @Model.Maker</p>
+<p>@Html.DisplayNameFor(i => Model.Maker): @Model.Maker.Name</p>
 <p>@Html.DisplayNameFor(i => Model.Name): @Model.Name</p>
 <form asp-action="Delete">
     <input asp-for="Id" />

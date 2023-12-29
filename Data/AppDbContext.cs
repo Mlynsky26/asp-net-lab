@@ -17,6 +17,7 @@ namespace Data
         public DbSet<OrganizationEntity> Organizations { get; set; }
         public DbSet<CarEntity> Cars { get; set; }
         public DbSet<OwnerEntity> Owners { get; set; }
+        public DbSet<MakerEntity> Makers { get; set; }
         public AppDbContext()
         {
             var folder = Environment.SpecialFolder.LocalApplicationData;

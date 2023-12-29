@@ -4,27 +4,27 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Labolatorium3___App.Controllers
 {
-    [Route("api/owners")]
+    [Route("api/makers")]
     [ApiController]
-    public class OwnerApiController : ControllerBase
+    public class MakerApiController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public OwnerApiController(AppDbContext context)
+        public MakerApiController(AppDbContext context)
         {
             _context = context;
         }
 
-        public IActionResult GetOwnerByName(string? q)
+        public IActionResult GetMakersByName(string? q)
         {
             return Ok(
                 q == null 
                 ? 
-                _context.Owners.Select(o => new { name = $"{o.Name} {o.Surname}", id = o.Id }).ToList() 
+                _context.Makers.Select(o => new { name = o.Name, id = o.Id }).ToList() 
                 :
-                _context.Owners
+                _context.Makers
                 .Where(o => o.Name.ToUpper().StartsWith(q.ToUpper()))
-                .Select(o => new {name = $"{o.Name} {o.Surname}", id = o.Id})
+                .Select(o => new {name = o.Name, id = o.Id})
                 .ToList()
                 );
         }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class CreateDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,22 +53,16 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "cars",
+                name: "Makers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    maker = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    volume = table.Column<int>(type: "INTEGER", nullable: false),
-                    power = table.Column<int>(type: "INTEGER", nullable: false),
-                    engine_type = table.Column<string>(type: "TEXT", nullable: false),
-                    registration = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false),
-                    owner = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cars", x => x.Id);
+                    table.PrimaryKey("PK_Makers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,6 +80,24 @@ namespace Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Organizations", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Owners",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Surname = table.Column<string>(type: "TEXT", nullable: false),
+                    Phone = table.Column<string>(type: "TEXT", nullable: false),
+                    Address_City = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_Street = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_PostalCode = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Owners", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -216,15 +228,71 @@ namespace Data.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "cars",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    MakerId = table.Column<int>(type: "INTEGER", nullable: false),
+                    name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    volume = table.Column<int>(type: "INTEGER", nullable: false),
+                    power = table.Column<int>(type: "INTEGER", nullable: false),
+                    engine_type = table.Column<int>(type: "INTEGER", nullable: false),
+                    registration = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false),
+                    OwnerId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_cars", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_cars_Makers_MakerId",
+                        column: x => x.MakerId,
+                        principalTable: "Makers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_cars_Owners_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Owners",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "1fa2774a-54b8-46b2-8a05-b871276d3c48", "1fa2774a-54b8-46b2-8a05-b871276d3c48", "admin", "ADMIN" });
+                values: new object[,]
+                {
+                    { "0fdfe129-20e1-4192-b75b-17f4e06e865e", "0fdfe129-20e1-4192-b75b-17f4e06e865e", "admin", "ADMIN" },
+                    { "12164877-6a43-4e0e-aca7-e24140596fe7", "12164877-6a43-4e0e-aca7-e24140596fe7", "user", "USER" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "636b200e-694f-4693-a4d4-c2e83644d8a0", 0, "88bd8252-9455-4bca-83b5-8c24a910886a", "adam@gmail.com", true, false, null, "ADAM@GMAIL.COM", "ADAM", "AQAAAAEAACcQAAAAEPdH/fzBbitEmkCpFDLqGqXV9MNAhxSZn7y/13m27O+yUqfjGBePgM3Nmd1z68I8aA==", null, false, "5dc5e439-c02e-46bd-9721-9dd46d6914f4", false, "adam" });
+                values: new object[,]
+                {
+                    { "6f28bdb0-da45-4363-bb8a-fd1f575a3912", 0, "d80b7499-e71c-407f-94a0-74d13390ed01", "adam@gmail.com", true, false, null, "ADAM@GMAIL.COM", "ADAM", "AQAAAAEAACcQAAAAECKVZFjdymYAMPkRDKOLhoZGIaoIkS4kaB2nryMoUQwEttkMwrgdc2ddmtZGHqJEBw==", null, false, "4a08255d-077a-4d99-93b5-49ef7888bba2", false, "adam" },
+                    { "7b448ce9-9a7b-48c6-910a-0084a4460066", 0, "50c5bf68-0711-4196-b60a-afaff9183b9f", "michal@gmail.com", true, false, null, "MICHAL@GMAIL.COM", "MICHAL", "AQAAAAEAACcQAAAAELk0/NN62ccHqUPbohoDoM/nJ8iRCY3y/0cXoxP+x9XD4FiwSOji41vICYZ4aYRTcA==", null, false, "f6052561-4740-45be-a86a-db9850c3d5ab", false, "michal" },
+                    { "e7ae06d0-00e9-494d-97bb-e2b500194213", 0, "06bc0a28-bbaf-4d79-b1aa-f4cca8240fb7", "marek@gmail.com", true, false, null, "MAREK@GMAIL.COM", "MAREK", "AQAAAAEAACcQAAAAEPyxFQSoTTEoVo/WXgzfG/0jfGym59FDUltlwZ1wZ5J1GNDBuZEGNP0ARM/NJCijzQ==", null, false, "87a793f2-28ff-46b3-852c-f9ff63e57216", false, "marek" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Makers",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Seat" },
+                    { 2, "Opel" },
+                    { 3, "BMW" },
+                    { 4, "Mazada" },
+                    { 5, "Audi" },
+                    { 6, "Ford" },
+                    { 7, "VolksWagen" },
+                    { 8, "Mercedes" },
+                    { 9, "Ferrari" },
+                    { 10, "Renault" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Organizations",
@@ -236,18 +304,32 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "cars",
-                columns: new[] { "Id", "engine_type", "maker", "name", "owner", "power", "registration", "volume" },
+                table: "Owners",
+                columns: new[] { "Id", "Name", "Phone", "Surname", "Address_City", "Address_PostalCode", "Address_Street" },
                 values: new object[,]
                 {
-                    { 1, "Benzyna", "Seat", "Ibiza", "Jarek", 130, "KRA123AB", 1200 },
-                    { 2, "Diesel", "Opel", "Astra", "Darek", 180, "WW123AB", 1800 }
+                    { 1, "Darek", "123456789", "Kowalski", "Krakow", "31-200", "Filpa" },
+                    { 2, "Mariusz", "987654321", "Nowak", "Warszawa", "54-120", "Fiolkowa" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "1fa2774a-54b8-46b2-8a05-b871276d3c48", "636b200e-694f-4693-a4d4-c2e83644d8a0" });
+                values: new object[,]
+                {
+                    { "0fdfe129-20e1-4192-b75b-17f4e06e865e", "6f28bdb0-da45-4363-bb8a-fd1f575a3912" },
+                    { "12164877-6a43-4e0e-aca7-e24140596fe7", "e7ae06d0-00e9-494d-97bb-e2b500194213" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "cars",
+                columns: new[] { "Id", "engine_type", "MakerId", "name", "OwnerId", "power", "registration", "volume" },
+                values: new object[,]
+                {
+                    { 1, 1, 1, "Ibiza", 1, 130, "KRA123AB", 1200 },
+                    { 2, 2, 2, "Astra", 2, 180, "WW123AB", 1800 },
+                    { 3, 2, 2, "Vectra", 1, 100, "KK1237B", 1400 }
+                });
 
             migrationBuilder.InsertData(
                 table: "contacts",
@@ -297,6 +379,16 @@ namespace Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_cars_MakerId",
+                table: "cars",
+                column: "MakerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_cars_OwnerId",
+                table: "cars",
+                column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_contacts_OrganizationId",
                 table: "contacts",
                 column: "OrganizationId");
@@ -331,6 +423,12 @@ namespace Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Makers");
+
+            migrationBuilder.DropTable(
+                name: "Owners");
 
             migrationBuilder.DropTable(
                 name: "Organizations");

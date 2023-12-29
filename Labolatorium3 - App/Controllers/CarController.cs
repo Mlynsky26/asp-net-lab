@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Labolatorium3___App.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin, user")]
     public class CarController : Controller
     {
         private readonly ICarService _carService;
@@ -15,21 +15,27 @@ namespace Labolatorium3___App.Controllers
         }
 
         [AllowAnonymous]
-        public IActionResult Index(int page = 1, int size = 3)
+        public IActionResult Index(int page = 1, int size = 3, int maker = -1, bool isList = false)
         {
             if (size < 1) return BadRequest();
-            return View(_carService.FindPage(page, size));
+            ViewBag.Makers = _carService.GetMakers();
+            ViewBag.CurrentMaker = maker;
+            ViewBag.IsList = isList;
+            return View(_carService.FindPage(page, size, maker));
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Create(Car model)
         {
+            Console.WriteLine(ModelState.IsValid);
             if(ModelState.IsValid)
             {
                 _carService.Add(model);
@@ -40,12 +46,14 @@ namespace Labolatorium3___App.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult Update(int id)
         {
             return View(_carService.FindById(id));
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Update(Car model)
         {
             if (ModelState.IsValid)
@@ -58,12 +66,14 @@ namespace Labolatorium3___App.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
         {
             return View(_carService.FindById(id));
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(Car model)
         {
             _carService.DeleteById(model.Id);

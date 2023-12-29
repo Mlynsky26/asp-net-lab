@@ -1,4 +1,5 @@
 ﻿using Data;
+using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
 
@@ -14,6 +15,12 @@ namespace Labolatorium3___App.Models
 
         public int Add(Car car)
         {
+            Console.WriteLine(car.Id);
+            Console.WriteLine(car.MakerId);
+            Console.WriteLine(car.Maker);
+            Console.WriteLine(car.Maker?.Name);
+            Console.WriteLine(car.Owner);
+            Console.WriteLine(car?.Owner?.Name);
             var e = _context.Cars.Add(CarMapper.ToEntity(car));
             _context.SaveChanges();
  
@@ -32,18 +39,17 @@ namespace Labolatorium3___App.Models
 
         public List<Car> FindAll()
         {
-            return _context.Cars.Include(x => x.Owner).Select(e => CarMapper.FromEntity(e)).ToList();
+            return _context.Cars.Include(x => x.Owner).Include(x => x.Maker).Select(e => CarMapper.FromEntity(e)).ToList();
         }
 
         public Car? FindById(int id)
         {
-            var find = _context.Cars.Include(x => x.Owner).Single(x => x.Id == id);
-            Console.WriteLine(find.ToString());
+            var find = _context.Cars.Include(x => x.Owner).Include(x => x.Maker).Single(x => x.Id == id);
             return find is null ? null : CarMapper.FromEntity(find);
         }
         public List<Car> FindByOwnerId(int id)
         {
-            return _context.Cars.Include(x => x.Owner).Where(x => x.OwnerId == id).Select(e => CarMapper.FromEntity(e)).ToList();
+            return _context.Cars.Include(x => x.Owner).Include(x => x.Maker).Where(x => x.OwnerId == id).Select(e => CarMapper.FromEntity(e)).ToList();
         }
 
         public void Update(Car car)
@@ -53,17 +59,48 @@ namespace Labolatorium3___App.Models
             _context.SaveChanges();
         }
 
-        public PagingList<Car> FindPage(int page, int size)
+        public PagingList<Car> FindPage(int page, int size, int maker)
         {
-            return PagingList<Car>.Create(
-                    (p, s) => _context.Cars
-                    .OrderBy(c => c.Name)
-                    .Skip((p - 1) * s)
-                    .Take(s)
-                    .Select(CarMapper.FromEntity)
-                    .ToList()
-                    , page, size, _context.Cars.Count()
-                );
+            if(maker != -1)
+            {
+                return PagingList<Car>.Create(
+                        (p, s) => _context.Cars
+                        .Include(x => x.Owner)
+                        .Include(x => x.Maker)
+                        .OrderBy(c => c.Name)
+                        .Where(c => c.MakerId == maker)
+                        .Skip((p - 1) * s)
+                        .Take(s)
+                        .Select(CarMapper.FromEntity)
+                        .ToList()
+                        , page, size,
+                        _context.Cars
+                        .Include(x => x.Owner)
+                        .Include(x => x.Maker)
+                        .OrderBy(c => c.Name)
+                        .Where(c => c.MakerId == maker)
+                        .ToList().Count
+                    );
+            }
+            else
+            {
+                return PagingList<Car>.Create(
+                        (p, s) => _context.Cars
+                        .Include(x => x.Owner)
+                        .Include(x => x.Maker)
+                        .OrderBy(c => c.Name)
+                        .Skip((p - 1) * s)
+                        .Take(s)
+                        .Select(CarMapper.FromEntity)
+                        .ToList()
+                        , page, size, _context.Cars.Count()
+                    );
+            }
+        }
+
+        public List<MakerEntity> GetMakers()
+        {
+            return _context.Makers.ToList();
         }
     }
 }

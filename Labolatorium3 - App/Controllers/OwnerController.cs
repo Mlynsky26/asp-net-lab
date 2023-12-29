@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Labolatorium3___App.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin, user")]
     public class OwnerController : Controller
     {
         private readonly IOwnerService _ownerService;
@@ -24,12 +24,14 @@ namespace Labolatorium3___App.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Create(Owner model)
         {
             if(ModelState.IsValid)
@@ -42,12 +44,14 @@ namespace Labolatorium3___App.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult Update(int id)
         {
             return View(_ownerService.FindById(id));
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Update(Owner model)
         {
             if (ModelState.IsValid)
@@ -60,12 +64,14 @@ namespace Labolatorium3___App.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
         {
             return View(_ownerService.FindById(id));
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(Owner model)
         {
             _ownerService.DeleteById(model.Id);
