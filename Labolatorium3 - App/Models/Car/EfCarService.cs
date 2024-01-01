@@ -15,12 +15,6 @@ namespace Labolatorium3___App.Models
 
         public int Add(Car car)
         {
-            Console.WriteLine(car.Id);
-            Console.WriteLine(car.MakerId);
-            Console.WriteLine(car.Maker);
-            Console.WriteLine(car.Maker?.Name);
-            Console.WriteLine(car.Owner);
-            Console.WriteLine(car?.Owner?.Name);
             var e = _context.Cars.Add(CarMapper.ToEntity(car));
             _context.SaveChanges();
  
@@ -44,7 +38,7 @@ namespace Labolatorium3___App.Models
 
         public Car? FindById(int id)
         {
-            var find = _context.Cars.Include(x => x.Owner).Include(x => x.Maker).Single(x => x.Id == id);
+            var find = _context.Cars.Include(x => x.Owner).Include(x => x.Maker).SingleOrDefault(x => x.Id == id);
             return find is null ? null : CarMapper.FromEntity(find);
         }
         public List<Car> FindByOwnerId(int id)

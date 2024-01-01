@@ -35,7 +35,6 @@ namespace Labolatorium3___App.Controllers
         [Authorize(Roles = "admin")]
         public IActionResult Create(Car model)
         {
-            Console.WriteLine(ModelState.IsValid);
             if(ModelState.IsValid)
             {
                 _carService.Add(model);
@@ -49,6 +48,8 @@ namespace Labolatorium3___App.Controllers
         [Authorize(Roles = "admin")]
         public IActionResult Update(int id)
         {
+            Car? model = _carService.FindById(id);
+            if (model is null) return NotFound();
             return View(_carService.FindById(id));
         }
 
@@ -69,6 +70,8 @@ namespace Labolatorium3___App.Controllers
         [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
         {
+            Car? model = _carService.FindById(id);
+            if (model is null) return NotFound();
             return View(_carService.FindById(id));
         }
 

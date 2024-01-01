@@ -47,7 +47,9 @@ namespace Labolatorium3___App.Controllers
         [Authorize(Roles = "admin")]
         public IActionResult Update(int id)
         {
-            return View(_ownerService.FindById(id));
+            Owner? model = _ownerService.FindById(id);
+            if (model is null) return NotFound();
+            return View(model);
         }
 
         [HttpPost]
@@ -67,7 +69,9 @@ namespace Labolatorium3___App.Controllers
         [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
         {
-            return View(_ownerService.FindById(id));
+            Owner? model = _ownerService.FindById(id);
+            if (model is null) return NotFound();
+            return View(model);
         }
 
         [HttpPost]
@@ -82,8 +86,10 @@ namespace Labolatorium3___App.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
+            Owner? model = _ownerService.FindById(id);
+            if (model is null) return NotFound();
             ViewBag.Cars = _carService.FindByOwnerId(id);
-            return View(_ownerService.FindById(id));
+            return View(model);
         }
 
 
